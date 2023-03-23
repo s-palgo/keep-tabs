@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <link href="index.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="btns">
+            <div class="save-btns">
+                <button class="btn save-btn" id="save-tab-btn">Save current tab</button> 
+                <button class="btn save-btn" id="save-window-btn">Save current window</button> 
+            </div>
+
+            <div class="see-and-hide-tabs">
+                <button class="btn tabs-btn" id="see-saved-tabs-btn">See saved tabs</button>
+                <button class="btn tabs-btn" id="hide-saved-tabs-btn">Hide saved tabs</button>
+            </div>
+
+            <div class="see-and-hide-windows">
+                <button class="btn windows-btn" id="see-saved-windows-btn">See saved windows</button>
+                <button class="btn windows-btn" id="hide-saved-windows-btn">Hide saved windows</button>
+            </div>
+        </div> 
+
+        <div id="tabs-display">
+        </div>
+
+        <div class="tab-added-successfully-modal" id="tab-added-modal">
+			<div class="close-modal-btn-container">
+				<button class="modal-close-btn" id="modal-close-btn">X</button>
+			</div>
+			<div class="modal-inner" id="modal-inner-successfully-added">
+				<h2>Tab saved successfully!</h2>				
+			</div>
+		</div>
+
+        <div class="tab-already-added-modal" id="tab-already-added-modal">
+            <div class="close-modal-btn-container">
+				<button class="modal-close-btn" id="modal-close-btn-already-added">X</button>
+			</div>
+			<div class="modal-inner" id="modal-inner">
+			</div>
+        </div>
+
+        <div id="change-tab-title-modal" class="change-tab-title-modal">
+            <label>Change tab title</label>
+            <input placeholder="Type in new tab title" id="change-tab-title-input">
+            <input type="submit" id="change-tab-title-submit-btn">
+        </div>
+
+        <div class="custom-context-menu" id="custom-context-menu">
+            <ul>
+                <li>
+                    <button class="custom-context-menu-option">
+                        Open in new tab
+                    </button>
+                </li> 
+                <li>
+                    <button class="custom-context-menu-option">
+                        Open in new window
+                    </button>
+                </li>
+                <li>
+                    <button class="custom-context-menu-option">
+                        Change tab title
+                    </button>
+                </li>
+                <li>
+                    <button class="custom-context-menu-option">
+                        Revert tab title to original
+                    </button>
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
+        <script src="index.js"></script>
+    </body>
+</html>

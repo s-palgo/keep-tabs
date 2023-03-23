@@ -1,0 +1,167 @@
+body {
+    margin: 0;
+    padding: 10px;
+    background-color: white;
+    color: #1e1f26;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    min-width: 400px;
+}
+
+button {
+    color: white;
+    border-radius: 5px;
+    border: 1px #1e1f26 solid;
+    font-size: medium;
+
+    padding: 10px 20px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.save-btns {
+    display: flex;
+    justify-content: center;
+}
+
+.save-btn {
+    margin: 5px 10px;
+    background-color: #1e1f26;
+}
+
+.see-and-hide-tabs {
+    display: flex;
+    justify-content: center;
+}
+
+.tabs-btn {
+    background-color: darkorchid;
+    margin: 5px 10px;
+}
+
+.see-and-hide-windows {
+    display: flex;
+    justify-content: center;
+}
+
+.windows-btn {
+    background-color: darkgoldenrod;
+    margin: 5px 10px;
+}
+
+.tab-added-successfully-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 100px;
+    width: 250px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px 2px #666;
+    background-color: white;
+    color: #1dcd7b;
+}
+
+.tab-already-added-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 100px;
+    width: 250px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px 2px #666;
+    background-color: white;
+    color: red;
+}
+
+.modal-inner{
+    width: 290px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+/* modal buttons */
+
+.close-modal-btn-container{
+    text-align: right;
+    margin: 0px;
+
+    /* border: 1px solid red; */
+}
+
+.modal-close-btn {
+    font-size: 12px;
+    font-weight: bold;
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: gray;
+    
+    /* border: 1px solid green; */
+}
+
+.modal-close-btn:hover,
+.modal-close-btn:active{
+    color: red;
+    cursor: pointer;
+}
+
+.modal-close-btn:disabled{
+    color: whitesmoke;
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+/* custom-context-menu styles */
+
+.custom-context-menu {
+    display: none;
+    width: 260px;
+}
+
+.custom-context-menu ul li button {
+    color: #1e1f26;
+    border-radius: 0px;
+    border: 1px solid transparent;
+    width: 100%;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.custom-context-menu ul li button:hover {
+    background:rgba(0, 0, 0, 0.1);
+}
+
+.custom-context-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* change-tab-title modal */
+.change-tab-title-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 100px;
+    width: 250px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px 2px #666;
+    background-color: white;
+    color: #1e1f26;
+}
