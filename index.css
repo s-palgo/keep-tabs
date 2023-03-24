@@ -124,6 +124,9 @@ button:hover {
 
 .custom-context-menu {
     display: none;
+
+    position: fixed;
+
     width: 260px;
 }
 
@@ -140,7 +143,7 @@ button:hover {
 }
 
 .custom-context-menu ul li button:hover {
-    background:rgba(0, 0, 0, 0.1);
+    background-color: white;
 }
 
 .custom-context-menu ul {
