@@ -15,8 +15,6 @@ const changeTabTitleModal = document.getElementById("change-tab-title-modal");
 const changeTabTitleInput = document.getElementById("change-tab-title-input");
 const changeTabTitleSubmitBtn = document.getElementById("change-tab-title-submit-btn");
 
-// const renderedSavedTabs = document.getElementById("saved-tabs"); 
-
 let showingSavedTabs = true; // if this is true, then render saved tabs, else render saved windows
 
 // This array will keep track of all saved tabs. 
@@ -59,6 +57,27 @@ saveTabBtn.addEventListener("click", function() {
             tabAddedModal.style.display = "block";
         }
     });
+});
+
+saveWindowBtn.addEventListener("click", function() {
+    alert("Save window button clicked with event listener");
+    savedWindows.push("Window #" + (savedWindows.length + 1));
+});
+
+seeSavedTabsBtn.addEventListener("click", function() {  
+    showSavedTabs();
+});
+
+hideSavedTabsBtn.addEventListener("click", function() {
+    removeEventListenersFromSavedTabs();
+
+    tabsDisplay.innerHTML = "";
+});
+
+seeSavedWindowsBtn.addEventListener("click", function() {
+    showingSavedTabs = false;
+
+    renderSavedWindows();
 });
 
 modalCloseBtnTabSuccessfullySaved.addEventListener("click", function() {
@@ -140,20 +159,6 @@ function compareTabsByDateSaved(tab1, tab2) {
     }
 }
 
-
-saveWindowBtn.addEventListener("click", function() {
-    alert("Save window button clicked with event listener");
-    savedWindows.push("Window #" + (savedWindows.length + 1));
-});
-
-seeSavedTabsBtn.addEventListener("click", function() {
-    // for (let i = 0; i < savedTabs.length; i++) {
-    //     console.log(savedTabs[i]["title"]);
-    // }
-    
-    showSavedTabs();
-});
-
 function showSavedTabs() {
     showingSavedTabs = true;
 
@@ -161,18 +166,6 @@ function showSavedTabs() {
 
     addEventListenersToSavedTabs();
 }
-
-hideSavedTabsBtn.addEventListener("click", function() {
-    removeEventListenersFromSavedTabs();
-
-    tabsDisplay.innerHTML = "";
-});
-
-seeSavedWindowsBtn.addEventListener("click", function() {
-    showingSavedTabs = false;
-
-    renderSavedWindows();
-});
 
 function renderSavedTabs() {
     tabsDisplay.innerHTML = "";
@@ -211,9 +204,6 @@ function renderSavedTabs() {
                 </a>
             </p>
         `;
-
-        // console.log(allTabs);
-        // console.log(savedTabs[i]["title"]);
     }
 
     tabsDisplay.innerHTML += allTabs;
@@ -317,82 +307,6 @@ function addSuffixToDate(date) {
     }
 }
 
-// function displayCustomContextMenu(e, tabIndexInSavedTabs) {
-//     console.log("entering event listener for contextmenu");
-    
-//     e.preventDefault();
-//     customContextMenu.style.display = "none";
-
-//     // TODO: Display custom context menu
-//     customContextMenu.style.display = "block";
-
-//     // TODO: Add event listeners here for each of the buttons in the context menu
-//     customContextMenuOptions[0].addEventListener("click", function() {
-//         window.open(savedTabs[tabIndexInSavedTabs]["url"], "_blank");
-//     });
-    
-//     customContextMenuOptions[1].addEventListener("click", function() {
-//         window.open(savedTabs[tabIndexInSavedTabs]["url"]);    
-//     });
-
-//     customContextMenuOptions[2].addEventListener("click", function() {
-//         console.log("entering event listener for click on 3rd option in menu");
-
-
-//         changeTabTitleModal.style.display = "block";
-
-//         changeTabTitleSubmitBtn.addEventListener("click", function() {
-//             console.log("new title entered");
-
-
-//             // NOTE FOR TOMORROW: 
-//             // FIGURE OUT WHY BUTTON IS BEING 'CLICKED' MULTIPLE TIMES EVEN THOUGHT I ONLY CLICK IT ONCE
-
-//             // Every time the submit button is clicked,
-//             // it's looping through all the pages I've 
-//             // tried renaming.  
-
-
-            
-//             const newTitle = changeTabTitleInput.value;
-//             changeTabTitleInput.value = "";
-//             changeTabTitleModal.style.display = "none";
-            
-//             console.log("value of newTitle: " + newTitle);
-            
-//             savedTabs[tabIndexInSavedTabs]["title"] = newTitle;
-//             console.log(JSON.stringify(savedTabs[tabIndexInSavedTabs]));
-            
-//             console.log("savedTabs[tabIndexInSavedTabs][title]: " + savedTabs[tabIndexInSavedTabs]["title"]);
-//             localStorage.setItem("savedTabs", JSON.stringify(savedTabs));
-
-//             // let modalInnerHTMLBeforeAddingSuccessMessage = changeTabTitleModal.innerHTML;
-
-//             // console.log("innerHTML of modal: " + modalInnerHTMLBeforeAddingSuccessMessage);
-
-//             // changeTabTitleModal.innerHTML += `
-//             //     <h3>Title added!</h3>
-//             // `;
-
-
-//             // setTimeout(function() {
-//             //     // changeTabTitleModal.innerHTML = modalInnerHTMLBeforeAddingSuccessMessage;
-//             //     changeTabTitleModal.style.display = "none";
-//             // }, 3000);
-
-//             showSavedTabs();
-//             changeTabTitleSubmitBtn.unbind("click");
-//         });    
-//     });
-
-//     customContextMenuOptions[3].addEventListener("click", function() {
-//         savedTabs[tabIndexInSavedTabs]["title"] = savedTabs[tabIndexInSavedTabs]["originalTitle"];
-//         localStorage.setItem("savedTabs", JSON.stringify(savedTabs));
-//         showSavedTabs();
-//     });
-
-// }
-
 // Every time saved tabs are displayed, event listeners will be 
 // added to each tab. The listeners will listen for a "contextmenu"
 // event. If the event happens (i.e. if the user right-clicks a 
@@ -400,12 +314,6 @@ function addSuffixToDate(date) {
 // displayed.
 function addEventListenersToSavedTabs() {
     const allTabsByClassName = tabsDisplay.getElementsByClassName("tabs");
-
-    // for (let i = 0; i < allTabsByClassName.length; i++) {
-    //     allTabsByClassName[i].addEventListener("contextmenu", function(e) {
-    //         displayCustomContextMenu(e, i);
-    //     });
-    // }
 
     for (let i = 0; i < allTabsByClassName.length; i++) {
         console.log("Added an event listener");
@@ -417,11 +325,6 @@ function addEventListenersToSavedTabs() {
 // the event listeners from the tabs are removed as well. 
 function removeEventListenersFromSavedTabs() {
     const allTabsByClassName = tabsDisplay.getElementsByClassName("tabs");
-    // for (let i = 0; i < allTabsByClassName.length; i++) {
-    //     allTabsByClassName[i].removeEventListener("contextmenu", function(e) {
-    //         displayCustomContextMenu(e, i);
-    //     });
-    // }
 
     for (let i = 0; i < allTabsByClassName.length; i++) {
         console.log("Removed an event listener");
@@ -434,16 +337,14 @@ function displayCustomContextMenu(e) {
 
     let tabElementThatTriggeredEvent = e.target; // one of the displayed tabs
 
-    // console.log(tabElementThatTriggeredEvent);
-
     let idOfElementThatTriggeredEvent = tabElementThatTriggeredEvent.id;
 
     let tabIndexInSavedTabs = parseInt(idOfElementThatTriggeredEvent);    
     
-    
+    // Clear context menu before displaying
     customContextMenu.style.display = "none";
 
-    // TODO: Display custom context menu
+    // Display custom context menu
     customContextMenu.style.display = "block";
 
 
@@ -455,21 +356,6 @@ function displayCustomContextMenu(e) {
     let contextMenuWidth = customContextMenu.clientWidth;
     let contextMenuHeight = customContextMenu.clientHeight;
     
-    // console.log("Mouse x coordinate: " + mouseXCoordinate);
-    // console.log("Mouse y coordinate: " + mouseYCoordinate);
-    // console.log("Width of context menu: " + contextMenuWidth);
-    // console.log("Height of context menu: " + contextMenuHeight);
-    // console.log("Window width: " + windowWidth);
-    // console.log("Window height: " + windowHeight);
-
-    
-    // let mouseLeftPosition = e.pageX; 
-    // let mouseTopPosition = e.pageY;
-    // let windowWidth = window.width();
-    // let windowHeight = window.innerHeight;
-    // let contextMenuWidth = customContextMenu.outerWidth();
-    // let contextMenuHeight = customContextMenu.outerHeight();
-
     if ((mouseXCoordinate + contextMenuWidth) > windowWidth) {
         if ((mouseXCoordinate - contextMenuWidth) >= 0) {
             customContextMenu.style.left = (mouseXCoordinate - contextMenuWidth) + "px";
@@ -487,30 +373,7 @@ function displayCustomContextMenu(e) {
             customContextMenu.style.left = "0px";
         }    } else {
         customContextMenu.style.top = mouseYCoordinate + "px";
-    }
-
-    // console.log("Custom context menu left position: " + customContextMenu.style.left);
-    // console.log("Custom context menu top position: " + customContextMenu.style.top);
-
-
-    // x = x > windowWidth - contextMenuWidth ? windowWidth - contextMenuWidth : x;
-    // y = y > windowHeight - contextMenuHeight ? windowHeight - contextMenuHeight : y;
-
-    // let leftPosition = mouseLeftPosition;
-    // let topPosition = mouseTopPosition;
-
-    // if (leftPosition > (windowWidth - contextMenuWidth)) {
-    //     leftPosition = windowWidth - contextMenuWidth;
-    // }
-
-    // if (topPosition > (windowHeight - contextMenuHeight)) {
-    //     topPosition = windowHeight - contextMenuHeight;
-    // }
-
-    // customContextMenu.style.left = x + "px";
-    // customContextMenu.style.top = y + "px";
-
-    
+    }   
 
     // Add event listeners here for each of the buttons in the context menu
     const customContextMenuFirstOption = customContextMenuOptions[0];
@@ -569,11 +432,7 @@ function renameTab(e) {
     const elementThatTriggeredEvent = e.target; // customContextMenuThirdOption
     let idOfElementThatTriggeredEvent = elementThatTriggeredEvent.id;
     
-    // console.log("3rd option in context menu clicked");
-
     changeTabTitleSubmitBtn.id = idOfElementThatTriggeredEvent + "-btn";
-
-    // console.log("ID of submit btn: " + changeTabTitleSubmitBtn.id);
 
     changeTabTitleModal.style.display = "block";
 
@@ -597,29 +456,8 @@ function captureAndSaveNewTabTitle(e) {
     changeTabTitleInput.value = "";
     changeTabTitleModal.style.display = "none";
     
-    // console.log("value of newTitle: " + newTitle);
-    
     savedTabs[tabIndexInSavedTabs]["title"] = newTitle;
-    // console.log(JSON.stringify(savedTabs[tabIndexInSavedTabs]));
-    
-    // console.log("savedTabs[tabIndexInSavedTabs][title]: " + savedTabs[tabIndexInSavedTabs]["title"]);
     localStorage.setItem("savedTabs", JSON.stringify(savedTabs));
-
-    // let modalInnerHTMLBeforeAddingSuccessMessage = changeTabTitleModal.innerHTML;
-
-    // console.log("innerHTML of modal: " + modalInnerHTMLBeforeAddingSuccessMessage);
-
-    // changeTabTitleModal.innerHTML += `
-    //     <h3>Title added!</h3>
-    // `;
-
-
-    // setTimeout(function() {
-    //     // changeTabTitleModal.innerHTML = modalInnerHTMLBeforeAddingSuccessMessage;
-    //     changeTabTitleModal.style.display = "none";
-    // }, 3000);
-
-    // changeTabTitleSubmitBtn.unbind("click");
 
     removeEventListenersFromSavedTabs();
     showSavedTabs();
@@ -646,9 +484,6 @@ function revertTitleToOriginal(e) {
 
     customContextMenu.style.display = "none";
 }
-
-
-// getEventListeners(domElement)
 
 function findUniqueDates(arr) {
     let arrOfUniqueDates = [];
@@ -685,7 +520,6 @@ function findUniqueDates(arr) {
         }
         return arrOfUniqueDates;
     }
-
 }
 
 function renderSavedWindows() {
