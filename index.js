@@ -14,6 +14,7 @@ const customContextMenuOptions = customContextMenu.getElementsByClassName("custo
 const changeTabTitleModal = document.getElementById("change-tab-title-modal");
 const changeTabTitleInput = document.getElementById("change-tab-title-input");
 const changeTabTitleSubmitBtn = document.getElementById("change-tab-title-submit-btn");
+const cancelTabTitleChangeBtn = document.getElementById("cancel-tab-title-change-btn");
 
 let showingSavedTabs = true; // if this is true, then render saved tabs, else render saved windows
 
@@ -392,10 +393,7 @@ function displayCustomContextMenu(e) {
     addEventListenersToAllMenuOptions();
 
     // Hide context menu if user clicks somewhere on the page outside of menu
-    document.addEventListener("click", function() {
-        removeEventListenersFromAllMenuOptions();
-        customContextMenu.style.display = "none";
-    });
+    document.addEventListener("click", hideCustomContextMenu);
 }
 
 function addEventListenersToAllMenuOptions() {
@@ -426,28 +424,30 @@ function removeEventListenersFromAllMenuOptions() {
     customContextMenuFifthOption.removeEventListener("click", removeTabFromSavedTabs);
 }
 
+function hideCustomContextMenu() {
+    removeEventListenersFromAllMenuOptions();
+    customContextMenu.style.display = "none";
+}
+
 function openLinkInNewTab(e) {
     const elementThatTriggeredEvent = e.target; // customContextMenuFirstOption
     let idOfElementThatTriggeredEvent = elementThatTriggeredEvent.id;
     let tabIndexInSavedTabs = parseInt(idOfElementThatTriggeredEvent);
     
+    hideCustomContextMenu();
+    
     window.open(savedTabs[tabIndexInSavedTabs]["url"], "_blank");
-
-    removeEventListenersFromAllMenuOptions();
-    customContextMenu.style.display = "none";
 }
 
 function openLinkInNewWindow(e) {
     const elementThatTriggeredEvent = e.target; // customContextMenuSecondOption
     let idOfElementThatTriggeredEvent = elementThatTriggeredEvent.id;
     let tabIndexInSavedTabs = parseInt(idOfElementThatTriggeredEvent);
-    removeEventListenersFromAllMenuOptions();
+    hideCustomContextMenu();
     
     chrome.windows.create({
         url: savedTabs[tabIndexInSavedTabs]["url"]
     });
-
-    customContextMenu.style.display = "none";
 }
 
 function renameTab(e) {
@@ -458,10 +458,19 @@ function renameTab(e) {
 
     changeTabTitleModal.style.display = "block";
 
+    hideCustomContextMenu();
+
     changeTabTitleSubmitBtn.addEventListener("click", captureAndSaveNewTabTitle);
 
-    removeEventListenersFromAllMenuOptions();
-    customContextMenu.style.display = "none";
+    cancelTabTitleChangeBtn.addEventListener("click", cancelTabTitleChange);
+}
+
+function cancelTabTitleChange() {
+    changeTabTitleSubmitBtn.removeEventListener("click", captureAndSaveNewTabTitle);
+    changeTabTitleInput.value = "";
+    changeTabTitleModal.style.display = "none";
+
+    cancelTabTitleChangeBtn.removeEventListener("click", cancelTabTitleChange);
 }
 
 function captureAndSaveNewTabTitle(e) {
@@ -474,6 +483,14 @@ function captureAndSaveNewTabTitle(e) {
     let tabIndexInSavedTabs = parseInt(idOfElementThatTriggeredEvent);
 
     const newTitle = changeTabTitleInput.value;
+
+    // If user clicked the "submit" button without entering anything, 
+    // abort the entire tab-title-changing process by cancelling the change.
+    if (newTitle === "") {
+        cancelTabTitleChange();
+        return;
+    }
+
     changeTabTitleInput.value = "";
     changeTabTitleModal.style.display = "none";
     
@@ -484,6 +501,7 @@ function captureAndSaveNewTabTitle(e) {
     showSavedTabs();
 
     changeTabTitleSubmitBtn.removeEventListener("click", captureAndSaveNewTabTitle);
+    cancelTabTitleChangeBtn.removeEventListener("click", cancelTabTitleChange);
 }
 
 function revertTitleToOriginal(e) {
@@ -499,8 +517,7 @@ function revertTitleToOriginal(e) {
     removeEventListenersFromSavedTabs();
     showSavedTabs();
     
-    removeEventListenersFromAllMenuOptions();
-    customContextMenu.style.display = "none";
+    hideCustomContextMenu();
 }
 
 function removeTabFromSavedTabs(e) {
@@ -516,8 +533,7 @@ function removeTabFromSavedTabs(e) {
 
     showSavedTabs();
 
-    removeEventListenersFromAllMenuOptions();
-    customContextMenu.style.display = "none";
+    hideCustomContextMenu();
 }
 
 function findUniqueDates(arr) {
