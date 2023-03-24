@@ -33,7 +33,7 @@ saveTabBtn.addEventListener("click", function() {
         const currentTab = tabs[0];
         
         if (tabAlreadySaved(currentTab)) {
-            // TODO: notify user that tab is already saved by displaying modal
+            // Notify user that tab is already saved by displaying modal
             let indexOfCurrentTab = getIndexOfTabInSavedTabs(currentTab);
 
             tabAlreadyAddedModalInner.innerHTML = `
@@ -44,16 +44,16 @@ saveTabBtn.addEventListener("click", function() {
 
             tabAlreadyAddedModal.style.display = "block";
         } else {
-            // add tab to savedTabs array
+            // Add tab to savedTabs array
             addTabToSavedTabs(currentTab);
 
-            // sort savedTabs by date saved (most recently added tabs come first)
+            // Sort savedTabs by date saved (most recently added tabs come first)
             savedTabs.sort(compareTabsByDateSaved);
 
-            // set savedTabs key in localStorage to the updated value of the local savedTabs array
+            // Set savedTabs key in localStorage to the updated value of the local savedTabs array
             localStorage.setItem("savedTabs", JSON.stringify(savedTabs));
 
-            // TODO: Add a visual which notifies that tab has been saved successfully (e.g. a modal)     
+            // Display modal which notifies user that tab has been saved successfully  
             tabAddedModal.style.display = "block";
         }
     });
@@ -64,9 +64,7 @@ saveWindowBtn.addEventListener("click", function() {
     savedWindows.push("Window #" + (savedWindows.length + 1));
 });
 
-seeSavedTabsBtn.addEventListener("click", function() {  
-    showSavedTabs();
-});
+seeSavedTabsBtn.addEventListener("click", showSavedTabs);
 
 hideSavedTabsBtn.addEventListener("click", function() {
     removeEventListenersFromSavedTabs();
@@ -82,6 +80,7 @@ seeSavedWindowsBtn.addEventListener("click", function() {
 
 modalCloseBtnTabSuccessfullySaved.addEventListener("click", function() {
     tabAddedModal.style.display = "none";
+    
     removeEventListenersFromSavedTabs();
     showSavedTabs();
 });
@@ -338,8 +337,7 @@ function displayCustomContextMenu(e) {
     let tabElementThatTriggeredEvent = e.target; // one of the displayed tabs
 
     let idOfElementThatTriggeredEvent = tabElementThatTriggeredEvent.id;
-
-    let tabIndexInSavedTabs = parseInt(idOfElementThatTriggeredEvent);    
+    let tabIndexInSavedTabs = parseInt(idOfElementThatTriggeredEvent);
     
     // Clear context menu before displaying
     customContextMenu.style.display = "none";
@@ -378,48 +376,72 @@ function displayCustomContextMenu(e) {
     // Add event listeners here for each of the buttons in the context menu
     const customContextMenuFirstOption = customContextMenuOptions[0];
     customContextMenuFirstOption.id = tabIndexInSavedTabs + "-open-in-new-tab";
-    customContextMenuFirstOption.addEventListener("click", openLinkInNewTab);
     
     const customContextMenuSecondOption = customContextMenuOptions[1];
     customContextMenuSecondOption.id = tabIndexInSavedTabs + "-open-in-new-window";
-    customContextMenuSecondOption.addEventListener("click", openLinkInNewWindow);
 
     const customContextMenuThirdOption = customContextMenuOptions[2];
     customContextMenuThirdOption.id = tabIndexInSavedTabs + "-rename-title";
-    customContextMenuThirdOption.addEventListener("click", renameTab);
-
+    
     const customContextMenuFourthOption = customContextMenuOptions[3];
     customContextMenuFourthOption.id = tabIndexInSavedTabs + "-revert-title-to-original";
-    customContextMenuFourthOption.addEventListener("click", revertTitleToOriginal);
+    
+    const customContextMenuFifthOption = customContextMenuOptions[4];
+    customContextMenuFifthOption.id = tabIndexInSavedTabs + "-remove-from-saved-tabs";
+    
+    addEventListenersToAllMenuOptions();
 
     // Hide context menu if user clicks somewhere on the page outside of menu
     document.addEventListener("click", function() {
-        customContextMenuFirstOption.removeEventListener("click", openLinkInNewTab);
-        customContextMenuSecondOption.removeEventListener("click", openLinkInNewWindow);
-        customContextMenuThirdOption.removeEventListener("click", renameTab);
-        customContextMenuFourthOption.removeEventListener("click", revertTitleToOriginal);
-
+        removeEventListenersFromAllMenuOptions();
         customContextMenu.style.display = "none";
     });
 }
 
+function addEventListenersToAllMenuOptions() {
+    const customContextMenuFirstOption = customContextMenuOptions[0];
+    const customContextMenuSecondOption = customContextMenuOptions[1];
+    const customContextMenuThirdOption = customContextMenuOptions[2];
+    const customContextMenuFourthOption = customContextMenuOptions[3];
+    const customContextMenuFifthOption = customContextMenuOptions[4];
+ 
+    customContextMenuFirstOption.addEventListener("click", openLinkInNewTab);
+    customContextMenuSecondOption.addEventListener("click", openLinkInNewWindow);
+    customContextMenuThirdOption.addEventListener("click", renameTab);
+    customContextMenuFourthOption.addEventListener("click", revertTitleToOriginal);
+    customContextMenuFifthOption.addEventListener("click", removeTabFromSavedTabs);
+}
+
+function removeEventListenersFromAllMenuOptions() {
+    const customContextMenuFirstOption = customContextMenuOptions[0];
+    const customContextMenuSecondOption = customContextMenuOptions[1];
+    const customContextMenuThirdOption = customContextMenuOptions[2];
+    const customContextMenuFourthOption = customContextMenuOptions[3];
+    const customContextMenuFifthOption = customContextMenuOptions[4];
+ 
+    customContextMenuFirstOption.removeEventListener("click", openLinkInNewTab);
+    customContextMenuSecondOption.removeEventListener("click", openLinkInNewWindow);
+    customContextMenuThirdOption.removeEventListener("click", renameTab);
+    customContextMenuFourthOption.removeEventListener("click", revertTitleToOriginal);
+    customContextMenuFifthOption.removeEventListener("click", removeTabFromSavedTabs);
+}
+
 function openLinkInNewTab(e) {
-    const elementThatTriggeredEvent = e.target; // customContextMenuThirdOption
+    const elementThatTriggeredEvent = e.target; // customContextMenuFirstOption
     let idOfElementThatTriggeredEvent = elementThatTriggeredEvent.id;
     let tabIndexInSavedTabs = parseInt(idOfElementThatTriggeredEvent);
     
     window.open(savedTabs[tabIndexInSavedTabs]["url"], "_blank");
 
-    elementThatTriggeredEvent.removeEventListener("click", openLinkInNewTab);
-
+    removeEventListenersFromAllMenuOptions();
     customContextMenu.style.display = "none";
 }
 
 function openLinkInNewWindow(e) {
-    const elementThatTriggeredEvent = e.target; // customContextMenuThirdOption
+    const elementThatTriggeredEvent = e.target; // customContextMenuSecondOption
     let idOfElementThatTriggeredEvent = elementThatTriggeredEvent.id;
     let tabIndexInSavedTabs = parseInt(idOfElementThatTriggeredEvent);
-    elementThatTriggeredEvent.removeEventListener("click", openLinkInNewWindow);
+    removeEventListenersFromAllMenuOptions();
     
     chrome.windows.create({
         url: savedTabs[tabIndexInSavedTabs]["url"]
@@ -438,9 +460,8 @@ function renameTab(e) {
 
     changeTabTitleSubmitBtn.addEventListener("click", captureAndSaveNewTabTitle);
 
+    removeEventListenersFromAllMenuOptions();
     customContextMenu.style.display = "none";
-    
-    elementThatTriggeredEvent.removeEventListener("click", renameTab);
 }
 
 function captureAndSaveNewTabTitle(e) {
@@ -466,9 +487,7 @@ function captureAndSaveNewTabTitle(e) {
 }
 
 function revertTitleToOriginal(e) {
-    const elementThatTriggeredEvent = e.target;
-
-    console.log(elementThatTriggeredEvent);
+    const elementThatTriggeredEvent = e.target; // customContextMenuFourthOption
 
     let idOfElementThatTriggeredEvent = elementThatTriggeredEvent.id;
 
@@ -479,9 +498,25 @@ function revertTitleToOriginal(e) {
     
     removeEventListenersFromSavedTabs();
     showSavedTabs();
+    
+    removeEventListenersFromAllMenuOptions();
+    customContextMenu.style.display = "none";
+}
 
-    elementThatTriggeredEvent.removeEventListener("click", revertTitleToOriginal);
+function removeTabFromSavedTabs(e) {
+    const elementThatTriggeredEvent = e.target; // customContextMenuFifthOption
+    let idOfElementThatTriggeredEvent = elementThatTriggeredEvent.id;
+    let tabIndexInSavedTabs = parseInt(idOfElementThatTriggeredEvent);
 
+    removeEventListenersFromSavedTabs();
+
+    // Remove tab at tabIndexInSavedTabs from savedTabs array
+    savedTabs.splice(tabIndexInSavedTabs, 1);
+    localStorage.setItem("savedTabs", JSON.stringify(savedTabs));
+
+    showSavedTabs();
+
+    removeEventListenersFromAllMenuOptions();
     customContextMenu.style.display = "none";
 }
 
