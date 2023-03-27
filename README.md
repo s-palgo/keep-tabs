@@ -1,18 +1,14 @@
 # tabs
+#### Video Demo: <URL HERE>
+#### Description: Chrome extension to be able to save your tabs and windows by clicking a button so you don't have to worry about losing them. Organizes your saved tabs/windows by date saved. Offers the ability to save tabs/windows, and to view, rename, and remove them.
 
-Chrome extension to be able to save your tabs and windows by clicking a button so you don't have to worry about losing them. 
-
+## Why I Made This Extension
 I decided to make this after I kept running into a problem when closing a bunch of tabs and later reopening them: the tabs would not reopen because some Chrome extension blocked them from reopening. So I had to email myself all the links in all my windows when I needed to close them for some reason to be able to access them later. So now I'm just creating this Chrome extension to save myself the hassle. 
 
-Note: I'm pretty sure that an extension that does this probably already exists out in the real world, but I want to make my own extension anyways because why not, and also because it will be a good learning experience for me to "reinvent the wheel" and see what it takes to build a Chrome extension from scratch.
+Note: I'm pretty sure that an extension that does this probably already exists out in the real world, but I made my own extension anyways because why not.
 
+More seriously, though, I could have just used Google Chrome's native functionality to save all open tabs to solve my problem, but I decided to make a Chrome extension myself because 
+1. it's a good learning experience to reinvent the wheel and see what it takes to make a Chrome extension from scratch.
+2. I wanted to be able to see when I saved my tabs/windows and for some reason Chrome doesn't offer that functionality, which was another driving factor in making this extension. 
 
-Notes to myself: 
-
-What the extension should have: 
-- a button to click to save a window's tabs (user will have the option to give a name to that window)
-- a menu or list which has all saved windows organized by the date they were saved 
-- each saved window will have a button to open that window
-- each saved window will have info about the # of tabs in that window
-- if user clicks on a saved window, user should be taken to a page which displays that window's tabs (maybe as links, maybe as names of those tabs)
-- (optional) a search bar to search for a saved window
+## Files

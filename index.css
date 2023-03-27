@@ -8,7 +8,7 @@ body {
 }
 
 button {
-    color: white;
+    color: black;
     border-radius: 5px;
     border: 1px #1e1f26 solid;
     font-size: medium;
@@ -27,7 +27,7 @@ button:hover {
 
 .save-btn {
     margin: 5px 10px;
-    background-color: #1e1f26;
+    /* background-color: #1e1f26; */
 }
 
 .see-and-hide-tabs {
@@ -36,7 +36,7 @@ button:hover {
 }
 
 .tabs-btn {
-    background-color: darkorchid;
+    /* background-color: darkorchid; */
     margin: 5px 10px;
 }
 
@@ -46,7 +46,7 @@ button:hover {
 }
 
 .windows-btn {
-    background-color: darkgoldenrod;
+    /* background-color: darkgoldenrod; */
     margin: 5px 10px;
 }
 
@@ -58,12 +58,11 @@ button:hover {
     right: 0;
     left: 0;
     margin: auto;
-    height: 100px;
-    width: 250px;
+    height: fit-content;
+    width: fit-content;
     border-radius: 5px;
     box-shadow: 0px 0px 6px 2px #666;
     background-color: white;
-    color: red;
 }
 
 .window-already-added-modal {
@@ -74,24 +73,28 @@ button:hover {
     right: 0;
     left: 0;
     margin: auto;
-    height: 100px;
-    width: 250px;
+    height: fit-content;
+    width: fit-content;
     border-radius: 5px;
     box-shadow: 0px 0px 6px 2px #666;
     background-color: white;
-    color: red;
 }
 
 .modal-inner {
     width: 290px;
+    height: fit-content;
     margin: 0 auto;
+    padding: 0 5px;
+    /* border: 1px red solid; */
     text-align: center;
 }
 
 .modal-inner-window {
     width: 290px;
+    height: fit-content;
     margin: 0 auto;
     text-align: center;
+    padding: 0 5px;
 }
 
 
@@ -224,6 +227,7 @@ button:hover {
     width: fit-content;
     text-decoration: underline;
     margin-bottom: 10px;
+    color: #0000EE;
 }
 
 .windows:hover {

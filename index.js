@@ -59,7 +59,7 @@ function saveTab() {
 
             tabAlreadyAddedModalInner.innerHTML = `
                 <h2>
-                    You've already saved this tab on ${savedTabs[indexOfCurrentTab]["monthSaved"]}/${savedTabs[indexOfCurrentTab]["dateSaved"]}/${savedTabs[indexOfCurrentTab]["yearSaved"]} under the title of ${savedTabs[indexOfCurrentTab]["title"]}!
+                    You've already saved this tab on ${savedTabs[indexOfCurrentTab]["monthSaved"]}/${savedTabs[indexOfCurrentTab]["dateSaved"]}/${savedTabs[indexOfCurrentTab]["yearSaved"]} under the title of <span style='color: red'>${savedTabs[indexOfCurrentTab]["title"]}</span>!
                 </h2>
             `;
 
@@ -441,7 +441,7 @@ function saveWindow() {
 
             windowAlreadyAddedModalInner.innerHTML = `
                 <h2>
-                    You've already saved this window on ${savedWindows[indexOfCurrentWindow]["monthSaved"]}/${savedWindows[indexOfCurrentWindow]["dateSaved"]}/${savedWindows[indexOfCurrentWindow]["yearSaved"]} under the title of ${savedWindows[indexOfCurrentWindow]["title"]}!
+                    You've already saved this window on ${savedWindows[indexOfCurrentWindow]["monthSaved"]}/${savedWindows[indexOfCurrentWindow]["dateSaved"]}/${savedWindows[indexOfCurrentWindow]["yearSaved"]} under the title of <span style='color: red'>${savedWindows[indexOfCurrentWindow]["title"]}</span>!
                 </h2>
             `;
 
@@ -838,10 +838,10 @@ function seeAllTabsInWindow(e) {
     } else {
         let windowTabs = savedWindows[windowIndexInSavedWindows]["tabs"];
 
-        let listOfTabsInWindow = `<ul>`;
+        let listOfTabsInWindow = `<ul id='${windowIndexInSavedWindows}-window-tabs'>`;
         for (let i = 0; i < windowTabs.length; i++) {
             listOfTabsInWindow += `
-                <li>
+                <li id='${windowIndexInSavedWindows}-window-tab-${i}'>
                     <a href="${savedWindows[windowIndexInSavedWindows]["tabs"][i]["url"]}" target="_blank">
                         ${savedWindows[windowIndexInSavedWindows]["tabs"][i]["title"]}
                     </a>
