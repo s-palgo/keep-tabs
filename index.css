@@ -50,22 +50,6 @@ button:hover {
     margin: 5px 10px;
 }
 
-.tab-added-successfully-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-    height: 100px;
-    width: 250px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 6px 2px #666;
-    background-color: white;
-    color: #1dcd7b;
-}
-
 .tab-already-added-modal {
     display: none;
     position: fixed;
@@ -82,7 +66,29 @@ button:hover {
     color: red;
 }
 
-.modal-inner{
+.window-already-added-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 100px;
+    width: 250px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px 2px #666;
+    background-color: white;
+    color: red;
+}
+
+.modal-inner {
+    width: 290px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.modal-inner-window {
     width: 290px;
     margin: 0 auto;
     text-align: center;
@@ -91,11 +97,40 @@ button:hover {
 
 /* modal buttons */
 
-.close-modal-btn-container{
+.close-modal-btn-container {
     text-align: right;
     margin: 0px;
 
     /* border: 1px solid red; */
+}
+
+.close-modal-btn-container-window {
+    text-align: right;
+    margin: 0px;
+
+    /* border: 1px solid red; */
+}
+
+.modal-close-btn-window {
+    font-size: 12px;
+    font-weight: bold;
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: gray;
+    
+    /* border: 1px solid green; */
+}
+
+.modal-close-btn-window:hover,
+.modal-close-btn-window:active {
+    color: red;
+    cursor: pointer;
+}
+
+.modal-close-btn-window:disabled {
+    color: whitesmoke;
+    opacity: 0.2;
+    cursor: not-allowed;
 }
 
 .modal-close-btn {
@@ -109,12 +144,12 @@ button:hover {
 }
 
 .modal-close-btn:hover,
-.modal-close-btn:active{
+.modal-close-btn:active {
     color: red;
     cursor: pointer;
 }
 
-.modal-close-btn:disabled{
+.modal-close-btn:disabled {
     color: whitesmoke;
     opacity: 0.2;
     cursor: not-allowed;
@@ -167,4 +202,30 @@ button:hover {
     box-shadow: 0px 0px 6px 2px #666;
     background-color: white;
     color: #1e1f26;
+}
+
+.change-window-title-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 100px;
+    width: 250px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px 2px #666;
+    background-color: white;
+    color: #1e1f26;
+}
+
+.windows {
+    width: fit-content;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+.windows:hover {
+    cursor: pointer;
 }

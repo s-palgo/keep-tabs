@@ -10,10 +10,14 @@
                 <button class="btn save-btn" id="save-window-btn">Save current window</button> 
             </div>
 
+            <hr>
+
             <div class="see-and-hide-tabs">
                 <button class="btn tabs-btn" id="see-saved-tabs-btn">See saved tabs</button>
                 <button class="btn tabs-btn" id="hide-saved-tabs-btn">Hide saved tabs</button>
             </div>
+
+            <hr>
 
             <div class="see-and-hide-windows">
                 <button class="btn windows-btn" id="see-saved-windows-btn">See saved windows</button>
@@ -21,23 +25,27 @@
             </div>
         </div> 
 
-        <div id="tabs-display">
-        </div>
+        <div id="display">
+            <div id="tabs-display">
+            </div>
 
-        <div class="tab-added-successfully-modal" id="tab-added-modal">
-			<div class="close-modal-btn-container">
-				<button class="modal-close-btn" id="modal-close-btn">X</button>
-			</div>
-			<div class="modal-inner" id="modal-inner-successfully-added">
-				<h2>Tab saved successfully!</h2>				
-			</div>
-		</div>
+            <div id="windows-display">
+            </div>
+        </div>
 
         <div class="tab-already-added-modal" id="tab-already-added-modal">
             <div class="close-modal-btn-container">
 				<button class="modal-close-btn" id="modal-close-btn-already-added">X</button>
 			</div>
-			<div class="modal-inner" id="modal-inner">
+			<div class="modal-inner" id="tab-already-added-modal-inner">
+			</div>
+        </div>
+
+        <div class="window-already-added-modal" id="window-already-added-modal">
+            <div class="close-modal-btn-container-window">
+				<button class="modal-close-btn-window" id="modal-close-btn-window-already-added">X</button>
+			</div>
+			<div class="modal-inner-window" id="window-already-added-modal-inner">
 			</div>
         </div>
 
@@ -48,6 +56,13 @@
             <button type="button" id="cancel-tab-title-change-btn">Cancel</button>
             <!-- <input type="submit" id="change-tab-title-submit-btn">
             <input type="submit" value="Cancel" id="cancel-tab-title-change-btn"> -->
+        </div>
+
+        <div id="change-window-title-modal" class="change-window-title-modal">
+            <label>Change window title</label>
+            <input placeholder="Type in new window title" id="change-window-title-input">
+            <button type="submit" id="change-window-title-submit-btn">Submit</button>
+            <button type="button" id="cancel-window-title-change-btn">Cancel</button>
         </div>
 
         <div class="custom-context-menu" id="custom-context-menu">
@@ -79,6 +94,36 @@
                 </li>
             </ul>
 
+        </div>
+
+        <div class="custom-context-menu" id="custom-context-menu-for-windows">
+            <ul>
+                <li>
+                    <button class="custom-context-menu-option-for-windows">
+                        Open all tabs in new window
+                    </button>
+                </li> 
+                <li>
+                    <button class="custom-context-menu-option-for-windows">
+                        See all window tabs
+                    </button>
+                </li>
+                <li>
+                    <button class="custom-context-menu-option-for-windows">
+                        Change window title
+                    </button>
+                </li>
+                <li>
+                    <button class="custom-context-menu-option-for-windows">
+                        Revert window title to original
+                    </button>
+                </li>
+                <li>
+                    <button class="custom-context-menu-option-for-windows">
+                        Remove from saved windows
+                    </button>
+                </li>
+            </ul>
         </div>
 
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
