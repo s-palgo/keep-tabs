@@ -14,7 +14,6 @@ const changeTabTitleModal = document.getElementById("change-tab-title-modal");
 const changeTabTitleInput = document.getElementById("change-tab-title-input");
 const changeTabTitleSubmitBtn = document.getElementById("change-tab-title-submit-btn");
 const cancelTabTitleChangeBtn = document.getElementById("cancel-tab-title-change-btn");
-
 const display = document.getElementById("display");
 const windowsDisplay = document.getElementById("windows-display");
 const customContextMenuForWindows = document.getElementById("custom-context-menu-for-windows");
@@ -28,11 +27,9 @@ const modalCloseBtnWindowAlreadySaved = document.getElementById("modal-close-btn
 const windowAlreadyAddedModalInner = document.getElementById("window-already-added-modal-inner");
 
 
-
-let showingSavedTabs = true; // if this is true, then render saved tabs, else render saved windows
-
 // This array will keep track of all saved tabs. 
 let savedTabs = [];
+// This array will keep track of all saved windows. 
 let savedWindows = [];
 
 // Checking to see if localStorage already has saved tabs or not.
@@ -42,6 +39,8 @@ if (savedTabsFromLocalStorage) {
     savedTabs = savedTabsFromLocalStorage;
 }
 
+// Checking to see if localStorage already has saved windows or not.
+// If it does, then we save those windows in the local savedWindows array.
 const savedWindowsFromLocalStorage = JSON.parse(localStorage.getItem("savedWindows"));
 if (savedWindowsFromLocalStorage) {
     savedWindows = savedWindowsFromLocalStorage;
@@ -148,8 +147,6 @@ function tabAlreadySaved(tab) {
 }
 
 function showSavedTabs() {
-    showingSavedTabs = true;
-
     hideSavedWindows();
 
     renderSavedTabs();
@@ -208,7 +205,6 @@ function addEventListenersToSavedTabs() {
     const allTabsByClassName = tabsDisplay.getElementsByClassName("tabs");
 
     for (let i = 0; i < allTabsByClassName.length; i++) {
-        console.log("Added an event listener");
         allTabsByClassName[i].addEventListener("contextmenu", displayCustomContextMenu);
     }
 }
@@ -219,7 +215,6 @@ function removeEventListenersFromSavedTabs() {
     const allTabsByClassName = tabsDisplay.getElementsByClassName("tabs");
 
     for (let i = 0; i < allTabsByClassName.length; i++) {
-        console.log("Removed an event listener");
         allTabsByClassName[i].removeEventListener("contextmenu", displayCustomContextMenu);
     }
 }
@@ -369,8 +364,6 @@ function cancelTabTitleChange() {
 
 function captureAndSaveNewTabTitle(e) {
     const elementThatTriggeredEvent = e.target; // changeTabTitleSubmitBtn
-
-    console.log(elementThatTriggeredEvent);
     
     let idOfElementThatTriggeredEvent = elementThatTriggeredEvent.id;
 
@@ -435,10 +428,7 @@ function saveWindow() {
         if (windowAlreadySaved(currentWindow)) {
             let indexOfCurrentWindow = getIndexOfWindowInSavedWindows(currentWindow);
             
-            // TODO: Notify the user that a window with same tabs in same order has already been saved
-            // TODO: Include a note about when the window was previously saved and the title of the window
-            // console.log(`You've already added this window on ${savedWindows[indexOfCurrentWindow]["monthSaved"]}/${savedWindows[indexOfCurrentWindow]["dateSaved"]}/${savedWindows[indexOfCurrentWindow]["yearSaved"]}!`);
-
+            // Notify the user that a window with same tabs has already been saved
             windowAlreadyAddedModalInner.innerHTML = `
                 <h2>
                     You've already saved this window on ${savedWindows[indexOfCurrentWindow]["monthSaved"]}/${savedWindows[indexOfCurrentWindow]["dateSaved"]}/${savedWindows[indexOfCurrentWindow]["yearSaved"]} under the title of <span style='color: red'>${savedWindows[indexOfCurrentWindow]["title"]}</span>!
@@ -456,7 +446,7 @@ function saveWindow() {
             // Set savedWindows key in localStorage to the updated value of the local savedWindows array
             localStorage.setItem("savedWindows", JSON.stringify(savedWindows));
             
-            // TODO: Show updated windows list on page
+            // Show updated windows list on page
             refreshSavedWindowsDisplay();
         }
     });
@@ -544,61 +534,11 @@ function getIndexOfWindowInSavedWindows(window) {
     }
 
     return -1;
-    
-
-
-
-    // const tabsInWindow = window.tabs;
-        
-    // for (let i = 0; i < savedWindows.length; i++) {
-    //     let currentSavedWindow = savedWindows[i];
-    //     let currentSavedWindowIsSameAsParameterWindow = true;
-
-    //     if (currentSavedWindow["tabs"].length !== tabsInWindow.length) {
-    //         continue;
-    //     } else {
-    //         for (let j = 0; j < tabsInWindow.length; j++) {
-    //             if (currentSavedWindow["tabs"][j]["url"] !== tabsInWindow[j]["url"]) {
-    //                 currentSavedWindowIsSameAsParameterWindow = false;
-    //                 break;
-    //             }
-    //         }
-
-    //         if (currentSavedWindowIsSameAsParameterWindow) {
-    //             return i;
-    //         }
-    //     }
-    // }
-
-    // return -1;
-    
-
-
-
-
-
-
-
-
-
-
-
-    // if (!windowAlreadySaved(window)) {
-    //     return -1;
-    // } else {
-        
-    // }
 }
 
-// NOTE FOR TOMORROW: CHANGE THIS METHOD SO 
-// THAT TWO WINDOWS WITH THE SAME TABS ARE 
-// TREATED AS THE SAME, EVEN IF THE TABS ARE 
-// IN DIFFERENT ORDER
-
-// ALSO CHANGE THE GETINDEXOFWINDOWINSAVED() METHOD IF NEEDED
-
-// this method treats windows with the same tabs open as "already saved"
-// e.g. if I saved a window with 8 tabs, then I opened another window with the same 8 urls, those would be considered the same windows
+// This method treats windows with the same tabs open as "already saved".
+// E.g. if I saved a window with 8 tabs, then I opened another window with 
+// the same 8 URLs, those would be considered the same windows.
 function windowAlreadySaved(window) {
     const tabsInWindow = window.tabs;
     let windowTabUrls = [];
@@ -629,65 +569,6 @@ function windowAlreadySaved(window) {
     }
 
     return false;
-    
-    // const tabsInWindow = window.tabs;
-    
-    // for (let i = 0; i < savedWindows.length; i++) {
-    //     let currentSavedWindow = savedWindows[i];
-    //     let currentSavedWindowIsSameAsParameterWindow = true;
-
-    //     if (currentSavedWindow["tabs"].length !== tabsInWindow.length) {
-    //         continue;
-    //     } else {
-    //         for (let j = 0; j < tabsInWindow.length; j++) {
-    //             if (currentSavedWindow["tabs"][j]["url"] !== tabsInWindow[j]["url"]) {
-    //                 currentSavedWindowIsSameAsParameterWindow = false;
-    //                 break;
-    //             }
-    //         }
-            
-    //         if (currentSavedWindowIsSameAsParameterWindow) {
-    //             return true;
-    //         }
-    //     }
-    // }
-
-    // return false;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // for (let i = 0; i < savedWindows.length; i++) {
-        
-    
-        
-    //     let currentSavedWindow = savedWindows[i];
-    //     if (tabsInWindow.length === currentSavedWindow["tabs"].length) {
-    //         for (let j = 0; j < tabsInWindow.length; j++) {
-    //             if (tabsInWindow[j]["url"] !== currentSavedWindow["tabs"][j]["url"]) {
-    //                 return false;
-    //             }
-    //         }
-    //         // Reaching this point means that the parameter window and savedWindows[i] have the same tabs in the same order
-    //         return true;
-    //     }
-    // }
-    // // Reaching this point means that no window in savedWindows had the same tabs in the same order
-    // return false;
 }
 
 function showSavedWindows() {    
@@ -702,7 +583,6 @@ function addEventListenersToSavedWindows() {
     const allWindowsByClassName = windowsDisplay.getElementsByClassName("windows");
 
     for (let i = 0; i < allWindowsByClassName.length; i++) {
-        console.log("Added an event listener");
         allWindowsByClassName[i].addEventListener("contextmenu", displayCustomContextMenuForWindows);
         allWindowsByClassName[i].addEventListener("click", openAllTabsInNewWindow);
     }
@@ -712,7 +592,6 @@ function removeEventListenersFromSavedWindows() {
     const allWindowsByClassName = windowsDisplay.getElementsByClassName("windows");
 
     for (let i = 0; i < allWindowsByClassName.length; i++) {
-        console.log("Added an event listener");
         allWindowsByClassName[i].removeEventListener("contextmenu", displayCustomContextMenuForWindows);
         allWindowsByClassName[i].removeEventListener("click", openAllTabsInNewWindow);
     }
@@ -774,12 +653,6 @@ function displayCustomContextMenuForWindows(e) {
         ${savedWindows[windowIndexInSavedWindows]["title"]}
     `;
     
-    // console.log(savedWindows[windowIndexInSavedWindows]);
-    // console.log(windowIndexInSavedWindows);
-    // console.log(windowElementThatTriggeredEvent.innerHTML.trim());
-    // console.log(innerHTMLWithoutListOfTabs.trim());
-    // console.log(windowElementThatTriggeredEvent.innerHTML.trim() === innerHTMLWithoutListOfTabs.trim());
-
     if (windowElementThatTriggeredEvent.innerHTML.trim() === innerHTMLWithoutListOfTabs.trim()) {
         customContextMenuSecondOption.innerHTML = "See all window tabs";
     } else {
@@ -876,7 +749,6 @@ function renameWindow(e) {
 
 function captureAndSaveNewWindowTitle(e) {
     const elementThatTriggeredEvent = e.target; // changeWindowTitleSubmitBtn
-    // console.log(elementThatTriggeredEvent);
     let idOfElementThatTriggeredEvent = elementThatTriggeredEvent.id;
     let windowIndexInSavedWindows = parseInt(idOfElementThatTriggeredEvent);
 
