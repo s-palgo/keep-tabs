@@ -380,7 +380,7 @@ function captureAndSaveNewTabTitle(e) {
 
     // If user clicked the "submit" button without entering anything, 
     // abort the entire tab-title-changing process by cancelling the change.
-    if (newTitle === "") {
+    if (newTitle.trim().length === 0) {
         cancelTabTitleChange();
         return;
     }
@@ -884,7 +884,7 @@ function captureAndSaveNewWindowTitle(e) {
 
     // If user clicked the "submit" button without entering anything, 
     // abort the entire window-title-changing process by cancelling the change.
-    if (newTitle === "") {
+    if (newTitle.trim().length === 0) {
         cancelWindowTitleChange();
         return;
     }
