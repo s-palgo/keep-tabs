@@ -1,5 +1,5 @@
 # tabs
-#### Chrome extension to be able to save your tabs and windows by clicking a button so you don't have to worry about losing them. Organizes your saved tabs/windows by date saved. Offers the ability to save tabs/windows, and to view, rename, and remove them.
+#### Keep Tabs: A Chrome extension to be able to save your tabs and windows by clicking a button so you don't have to worry about losing them. Organizes your saved tabs/windows by date saved. Offers the ability to save tabs/windows, and to view, rename, and remove them.
 #### Video Demo: <https://www.youtube.com/watch?v=pmic1NQNv4s>
 
 ## Why I Made This Extension
