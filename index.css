@@ -27,7 +27,6 @@ button:hover {
 
 .save-btn {
     margin: 5px 10px;
-    /* background-color: #1e1f26; */
 }
 
 .see-and-hide-tabs {
@@ -36,7 +35,6 @@ button:hover {
 }
 
 .tabs-btn {
-    /* background-color: darkorchid; */
     margin: 5px 10px;
 }
 
@@ -46,7 +44,6 @@ button:hover {
 }
 
 .windows-btn {
-    /* background-color: darkgoldenrod; */
     margin: 5px 10px;
 }
 
@@ -85,7 +82,6 @@ button:hover {
     height: fit-content;
     margin: 0 auto;
     padding: 0 5px;
-    /* border: 1px red solid; */
     text-align: center;
 }
 
@@ -97,21 +93,14 @@ button:hover {
     padding: 0 5px;
 }
 
-
-/* modal buttons */
-
 .close-modal-btn-container {
     text-align: right;
     margin: 0px;
-
-    /* border: 1px solid red; */
 }
 
 .close-modal-btn-container-window {
     text-align: right;
     margin: 0px;
-
-    /* border: 1px solid red; */
 }
 
 .modal-close-btn-window {
@@ -120,8 +109,6 @@ button:hover {
     background-color: transparent;
     border: 1px solid transparent;
     color: gray;
-    
-    /* border: 1px solid green; */
 }
 
 .modal-close-btn-window:hover,
@@ -142,8 +129,6 @@ button:hover {
     background-color: transparent;
     border: 1px solid transparent;
     color: gray;
-    
-    /* border: 1px solid green; */
 }
 
 .modal-close-btn:hover,
@@ -158,13 +143,9 @@ button:hover {
     cursor: not-allowed;
 }
 
-/* custom-context-menu styles */
-
 .custom-context-menu {
     display: none;
-
     position: fixed;
-
     width: 260px;
 }
 
@@ -190,7 +171,6 @@ button:hover {
     padding: 0;
 }
 
-/* change-tab-title modal */
 .change-tab-title-modal {
     display: none;
     position: fixed;
