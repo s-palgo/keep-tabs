@@ -13,9 +13,7 @@
         }
     },
     "permissions": [
-        "tabs",
-        "storage", 
-        "activeTab"
+        "tabs"
     ], 
     "icons": {
         "16": "tabs_logo_16x16.png",
