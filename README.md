@@ -9,13 +9,13 @@
 A Chrome extension to be able to save your tabs and windows by clicking a button so you don't have to worry about losing them. Organizes your saved tabs/windows by date saved. Offers the ability to save tabs/windows, and to view, rename, and remove them.
 
 ## Why I Made This Extension
-I decided to make this after I kept running into a problem when closing a bunch of tabs and later reopening them: the tabs would not reopen because some Chrome extension that I've installed (I'm not sure exactly which one) blocked them from reopening. So I had to email myself all the links in all my windows when I needed to close them for some reason to be able to access them later. 
+I decided to make this after I kept running into a problem when closing a bunch of tabs and later reopening them: the tabs would not reopen because some Chrome extension that I've installed (I'm not sure exactly which one) blocked a large cluster of tabs from reopening together. So I had to email myself all the links in all my windows when I needed to close them for some reason to be able to access them later. 
 
 Another problem I faced was that Chrome's native bookmarking feature doesn't have the functionality to sort bookmarked tabs by date, which was information I wanted to be able to have as a Chrome user (e.g. I wanted to be able to see when I saved a particular site or window). Hence, I decided to create this Chrome extension to save myself the hassle. 
 
-Note: I'm pretty sure that an extension that does this probably already exists out in the real world, but I made my own extension anyways because why not. 
+Note: I'm sure that an extension that does this already exists out in the real world, but I made my own extension anyways because why not. 
 
-More seriously, though, making this extension helped fulfill a need that I had, and always was a valuable learning experience to "reinvent the wheel" and see what it takes to make a Chrome extension from scratch.
+More seriously, though, making this extension helped fulfill a geniune need that I had as a Chrome user, and it was a valuable learning experience to "reinvent the wheel" and see firsthand what it takes to make a Chrome extension from scratch.
 
 ## Files
 1. index.html: This file lays out the basic display of the extension. It also defines the layout of the modals and the custom context menu that will be triggered by certain user actions. 
