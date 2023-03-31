@@ -1,4 +1,4 @@
-# tabs
+# keep-tabs
 
 #### Install: <https://chrome.google.com/webstore/detail/keep-tabs/gjalepackokkccnpnmpjeiaapmpemhcd?hl=en>
 #### Video Demo: <https://www.youtube.com/watch?v=pmic1NQNv4s>
