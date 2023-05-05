@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "description": "Saves your tabs/windows. Organizes saved items by date saved. Offers functionality to view, rename, and remove saved items.",
-    "version": "1.0",
+    "version": "1.0.1",
     "name": "Keep Tabs",
     "action": {
         "default_popup": "index.html", 
