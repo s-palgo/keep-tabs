@@ -497,10 +497,15 @@ function addWindowToSavedWindows(window) {
 function generateOriginalTitleForWindow(window) {   
     const tabsInCurrentWindow = window.tabs;
     const numOfTabsInWindow = tabsInCurrentWindow.length;
+    let firstTabName = `"${tabsInCurrentWindow[0]["title"]}"`;
     
-    const originalTitle = `"${tabsInCurrentWindow[0]["title"]}" + ${numOfTabsInWindow - 1} more tabs`;
-
-    return originalTitle;
+    if (numOfTabsInWindow == 1) {
+       return firstTabName;
+    } else if (numOfTabsInWindow == 2) {
+        return firstTabName += " + 1 more tab";
+    } else {
+        return firstTabName + ` + ${numOfTabsInWindow - 1} more tabs`;
+    }
 }
 
 
@@ -653,7 +658,9 @@ function displayCustomContextMenuForWindows(e) {
         ${savedWindows[windowIndexInSavedWindows]["title"]}
     `;
     
-    if (windowElementThatTriggeredEvent.innerHTML.trim() === innerHTMLWithoutListOfTabs.trim()) {
+    let windowElementInnerHTMLDecodedForSpecialCharacters = he.decode(windowElementThatTriggeredEvent.innerHTML.trim());
+
+    if (windowElementInnerHTMLDecodedForSpecialCharacters.trim() === innerHTMLWithoutListOfTabs.trim()) {
         customContextMenuSecondOption.innerHTML = "See all window tabs";
     } else {
         customContextMenuSecondOption.innerHTML = "Hide tabs in window";
@@ -692,7 +699,6 @@ function openAllTabsInNewWindow(e) {
     chrome.windows.create({
         url: windowTabUrls
     });
-
 }
 
 function seeAllTabsInWindow(e) {
